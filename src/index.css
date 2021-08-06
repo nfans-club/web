@@ -1,13 +1,264 @@
-body {
+*{
+  box-sizing: border-box;
+}
+body{
+  display: flex;
+  justify-content: center;
+  width: 100%;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: whitesmoke;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.Content{
+  width: 100%;
+  max-width: 800px;
+  justify-content: center;
+  align-items: center;
+}
+
+.MobContent{
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.BodyContent{
+  width: 95%;
+}
+
+a{
+  text-decoration:none;
+}
+
+ul{
+  list-style:none;
+}
+
+.hdot{
+  margin: 0px 2px;
+}
+.vdot{
+  margin: 2px 0px;
+}
+
+div,form,ul{
+  display: flex;
+  margin: 0;
+}
+
+.WidthAuto{
+  width: auto;
+}
+
+.vertical{
+  flex-direction: column;
+}
+.Horizontal{
+  flex-direction: row;
+}
+
+.Header{
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+.End{
+  justify-content: flex-end;
+}
+.End > *{
+  margin-right: 10px;
+}
+.End > *:last-child{
+  margin-right: 0px;
+}
+
+.Start{
+  justify-content: flex-start;
+  align-self: flex-start;
+}
+
+.Start > *{
+  margin-right: 10px;
+}
+
+.Start > *:last-child{
+  margin-right: 0px;
+}
+
+.Footer{
+  justify-content: space-between;
+}
+
+.Banner{
+  width: 100%;
+}
+
+.Post{
+  background-color: white;
+  border-radius: 5px;
+  align-content: center;
+  align-items: center;
+  margin: 2px 0px;
+}
+
+.Post > p{
+  align-content:inherit;
+}
+
+.PostHeader{
+  white-space: nowrap;
+}
+
+ul{
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  padding-inline-start: 0px;
+  margin-block: 0;
+  margin-inline: 0; flex-direction: column;
+}
+li{
+  width: 100%;
+}
+
+.BIMG{
+  border-radius: 50%;
+}
+.BIMG.Small{
+  width: 18px;
+  height: 18px;
+}
+.hsplit{
+  width:min-content;
+  margin: 0px 5px;
+}
+
+.ContentMargin{
+  margin: 8px;
+}
+
+.TextTitle{
+  font-size: medium;
+}
+
+.TextContent{
+  font-size: small;
+}
+
+textarea{
+  height: 40px;
+}
+
+img{
+  max-width: 100%;
+}
+
+h1{
+  align-items: center;
+  word-break: break-word;
+}
+
+.PostContent{
+  display: block;
+}
+
+p{
+  word-break: break-word;
+}
+
+form{
+  position: relative;
+}
+
+input{
+  height: 40px;
+  min-width: 250px;
+  border-color: #0079D3;
+  border-width: 1px;
+  border-radius: 3px;
+  padding: 10px;
+  margin: 5px 0px;
+}
+
+button{
+  height: 40px;
+  min-width: 80px;
+  border-radius: 20px;
+  border:none;
+  color: white;
+  background-color: #0079D3;
+}
+.TagButton{
+  border-width: 1px;
+  border-color: darkgray;
+  background-color: aliceblue;
+  color: darkgray;
+}
+
+.CommentButton{
+  height: 30px;
+  width: 60px;
+  border-radius: 2px;
+  background-color: gainsboro;
+  color: gray;
+}
+
+.icon {
+  font-size: 30px;
+  color: gray;
+}
+
+.iconnote{
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  font-size: 18px;
+}
+
+.grayAround{
+  background-color: white;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+
+.around{
+  justify-content: space-around;
+}
+
+textarea{
+  height: 120px;
+}
+
+.PostTitle{
+  font-weight: bold;
+}
+
+hr{
+  height: 1px;
+  border:none;
+  border-top:1px solid #555555;
+  width: 100%;
+}
+
+p{
+  width: 100%;
+  margin-block-start: 5px;
+  margin-block-end: 5px;
+}
+.autop{
+  width: auto;
+}
+.log_sign_div{
+  align-items: center;
+}
+
+.AvatarSetting{
+  width: 200px;
+  height: 230px;
 }
