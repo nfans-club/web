@@ -13,10 +13,41 @@ class Title extends React.Component {
 		return (
 			<div className={HContent + " Header"}>
 				<h3>Create a post</h3>
-				<input placeholder="Choose a community"></input>
+				<div className={VContent + " Combobox"}>
+					<input placeholder="Choose a community"></input>
+					<Comboselect />
+				</div>
 			</div>
 		)
 	}
+}
+
+class Comboselect extends React.Component {
+
+	render() {
+		return (
+			<div className={VContent + "ComboboxSelect"}>
+				<scroll>
+
+					<ul className="ComboboxSelect">
+						<li>
+							<p>nintendo</p>
+						</li>
+						<li>
+							<p>test</p>
+						</li>
+						<li>
+							<p>test2</p>
+						</li>
+						<li>
+							<p>test3</p>
+						</li>
+					</ul>
+				</scroll>
+			</div>
+		)
+	}
+
 }
 
 class TextContext extends React.Component {

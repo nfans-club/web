@@ -32,6 +32,11 @@ body{
 
 a{
   text-decoration:none;
+  color: inherit;
+}
+
+.apoint:hover{
+  text-decoration:underline;
 }
 
 ul{
@@ -39,10 +44,10 @@ ul{
 }
 
 .hdot{
-  margin: 0px 2px;
+  margin: 0px 4px;
 }
 .vdot{
-  margin: 2px 0px;
+  margin: 4px 0px;
 }
 
 div,form,ul{
@@ -100,10 +105,14 @@ div,form,ul{
 
 .Post{
   background-color: white;
-  border-radius: 5px;
+  border-radius: 4px;
   align-content: center;
   align-items: center;
-  margin: 2px 0px;
+  margin: 4px 0px;
+}
+
+.comment{
+  margin: 4px 0px;
 }
 
 .Post > p{
@@ -135,7 +144,7 @@ li{
 }
 .hsplit{
   width:min-content;
-  margin: 0px 5px;
+  margin: 0px 4px;
 }
 
 .ContentMargin{
@@ -182,7 +191,7 @@ input{
   border-width: 1px;
   border-radius: 3px;
   padding: 10px;
-  margin: 5px 0px;
+  margin: 4px 0px;
 }
 
 button{
@@ -206,6 +215,11 @@ button{
   border-radius: 2px;
   background-color: gainsboro;
   color: gray;
+}
+
+.activeButton{
+  background-color: #0079D3;
+  color: white;
 }
 
 .icon {
@@ -248,8 +262,8 @@ hr{
 
 p{
   width: 100%;
-  margin-block-start: 5px;
-  margin-block-end: 5px;
+  margin-block-start: 4px;
+  margin-block-end: 4px;
 }
 .autop{
   width: auto;
@@ -261,4 +275,19 @@ p{
 .AvatarSetting{
   width: 200px;
   height: 230px;
+}
+
+.postclick:hover{
+  cursor: pointer;
+}
+
+.Combobox{
+  max-width: 250px;
+}
+
+.ComboboxSelect{
+  position: fixed;
+  max-width: 250px;
+  max-height: 50px;
+  background-color: wheat;
 }

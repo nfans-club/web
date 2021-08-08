@@ -2,27 +2,31 @@ import React from 'react';
 import './index.css';
 import ReactMarkdown from 'react-markdown';
 import { Comments, CommentArea } from './comment'
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import cookie from 'react-cookies'
 
 class Header extends React.Component {
 	render() {
+		var usr = "u/" + this.props.data.username
 		return (
 			<header className="Start TextContent Content">
 				<div className="ContentMargin ">
-					<a href="c/nintendo">
+					<Link className="apoint" to="/c/nintendo">
 						<div>
 							<img src="/favicon.ico" className="BIMG Small"></img>
 							<span className="hdot"></span>
 							c/nintendo
 						</div>
-					</a>
+					</Link>
 					<span className="hdot">·</span>
 					<span>Posted by </span>
 					<span className="hdot"></span>
-					<a href="u/FgoDt">
-						u/Fgodt
-					</a>
+					<Link className="apoint" to={"/" + usr}>
+						{usr}
+					</Link>
 					<span className="hdot"></span>
-					<span>2021.7.5</span>
+					<span>{this.props.data.create_time}</span>
 				</div>
 			</header>
 		)
@@ -35,7 +39,7 @@ class Title extends React.Component {
 	render() {
 		return (
 			<div className="vertical Start ContentMargin">
-				<span className="Start PostTitle">Title title title lkjlkj title title, title title title title title title title title</span>
+				<span className="Start PostTitle">{this.props.data.title}</span>
 			</div>
 		)
 	}
@@ -43,11 +47,10 @@ class Title extends React.Component {
 
 class Content extends React.Component {
 	render() {
-		var test = "Hello, *world* 以小写字母开头的元素代表一个 HTML 内置组件，比如 <div> 或者 <span> 会生成相应的字符串 'div' 或者 'span' 传递给 React.createElement（作为参数）。大写字母开头的元素则对应着在 JavaScript 引入或自定义的组件，如 <Foo /> 会编译为 React.createElement(Foo)。 sdjf; ajfd;adjf; akljdfa; lsdjfka; skdjfa; sdjkfa; skdjfas; ljdfkas;kdfjas;fjas; lkdjfsa;ldkfja;slkdfjas;lkfja;slkdjfa;slkjfdljflajfka;lskjdfa;lskdjf;lkjl!\r\n\r\n![Image of Yaktocat](/logo192.png)\r\n\r\n![Image of test](/test.png)\r\n\r\n this is my first post check out"
 		return (
 			<div className="Post ContentMargin vertical">
 				<ReactMarkdown>
-					{test}
+					{this.props.data.Content}
 				</ReactMarkdown>
 			</div>
 		)
@@ -61,11 +64,11 @@ class Footer extends React.Component {
 				<div className="Horizontal ContentMargin Start ">
 					<div className="Horizontal">
 						<i className="icofont-comment icon"></i>
-						<span className="iconnote">169</span>
+						<span className="iconnote">{this.props.data.comments}</span>
 					</div>
 					<div className="Horizontal">
 						<i className="icofont-eye-alt icon"></i>
-						<span className="iconnote">1620</span>
+						<span className="iconnote">{this.props.data.views}</span>
 					</div>
 					<div className="Horizontal">
 						<i className="icofont-gift icon"></i>
@@ -80,18 +83,23 @@ class Footer extends React.Component {
 
 
 class PostContent extends React.Component {
+
+	constructor(props) {
+		super(props)
+		console.log("get props", props)
+	}
 	render() {
 		return (
 			<div className="Content vertical ">
 				<div className="Content vertical grayAround">
-					<Header />
-					<Title />
-					<Content />
-					<Footer />
+					<Header data={this.props.data} />
+					<Title data={this.props.data} />
+					<Content data={this.props.data} />
+					<Footer data={this.props.data} />
 				</div>
 				<span className="vdot"></span>
 				<div className="Content grayAround">
-					<CommentArea />
+					<CommentArea data={this.props.data} />
 				</div>
 			</div>
 		)
@@ -100,19 +108,71 @@ class PostContent extends React.Component {
 }
 
 export class PostPage extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			comments: []
+		};
+		console.log(props)
+		this.id = this.props.match.params.postid
+		this.getPosts()
+		this.getComments()
+	}
+
+	getPosts() {
+		var data = {}
+		data.post_id = parseInt(this.id)
+		axios.post("http://192.168.0.65:8080/api/getpost", data)
+			.then(res => {
+				if (res.status == 200) {
+					console.log(res)
+					this.setState({ data: res.data.data })
+				}
+			}).catch(res => {
+				console.log(res)
+			})
+	}
+
+	getComments() {
+		var data = {}
+		data.token = cookie.load("usr_token")
+		data.post_id = parseInt(this.id)
+		axios.post("http://192.168.0.65:8080/api/getcomments", data)
+			.then(res => {
+				this.setState({ comments: res.data.data })
+			}).catch(res => {
+				console.log(res)
+			})
+	}
+
 	render() {
+		if (this.state.data === undefined) {
+			return (
+				<div>
+					<p>
+						Loding...
+					</p>
+				</div>
+			)
+		}
+		var comments = []
+		this.state.comments.map((comment, index) => {
+			comments.push(
+				<li>
+					<Comments data={comment} />
+				</li>
+			)
+		})
 		return (
 			<div className="Content vertical">
 				<span className="vdot"></span>
-				<div>
-					<PostContent />
+				<div className="Content">
+					<PostContent data={this.state.data} />
 				</div>
 				<span className="vdot"></span>
 				<div className="Content">
 					<ul >
-						<li>
-							<Comments />
-						</li>
+						{comments}
 					</ul>
 				</div>
 			</div>
