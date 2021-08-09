@@ -70,7 +70,7 @@ export class CommentArea extends React.Component {
 		data.post_id = parseInt(this.props.data.id)
 		data.comment = this.state.comment
 		data.token = cookie.load("usr_token")
-		axios.post("http://192.168.0.65:8080/api/createcomment",
+		axios.post("/api/createcomment",
 			data
 		).then(res => {
 			if (res.status == 200) {

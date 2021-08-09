@@ -5,8 +5,10 @@ import { Comments, CommentArea } from './comment'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import cookie from 'react-cookies'
+import { SetContentCSS } from '.';
+import { Header, Banner, Footer } from './header'
 
-class Header extends React.Component {
+class PHeader extends React.Component {
 	render() {
 		var usr = "u/" + this.props.data.username
 		return (
@@ -57,7 +59,7 @@ class Content extends React.Component {
 	}
 }
 
-class Footer extends React.Component {
+class PFooter extends React.Component {
 	render() {
 		return (
 			<footer className="Start TextContent">
@@ -92,10 +94,10 @@ class PostContent extends React.Component {
 		return (
 			<div className="Content vertical ">
 				<div className="Content vertical grayAround">
-					<Header data={this.props.data} />
+					<PHeader data={this.props.data} />
 					<Title data={this.props.data} />
 					<Content data={this.props.data} />
-					<Footer data={this.props.data} />
+					<PFooter data={this.props.data} />
 				</div>
 				<span className="vdot"></span>
 				<div className="Content grayAround">
@@ -107,7 +109,7 @@ class PostContent extends React.Component {
 
 }
 
-export class PostPage extends React.Component {
+class Post extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -122,7 +124,7 @@ export class PostPage extends React.Component {
 	getPosts() {
 		var data = {}
 		data.post_id = parseInt(this.id)
-		axios.post("http://192.168.0.65:8080/api/getpost", data)
+		axios.post("/api/getpost", data)
 			.then(res => {
 				if (res.status == 200) {
 					console.log(res)
@@ -137,7 +139,7 @@ export class PostPage extends React.Component {
 		var data = {}
 		data.token = cookie.load("usr_token")
 		data.post_id = parseInt(this.id)
-		axios.post("http://192.168.0.65:8080/api/getcomments", data)
+		axios.post("/api/getcomments", data)
 			.then(res => {
 				this.setState({ comments: res.data.data })
 			}).catch(res => {
@@ -180,3 +182,21 @@ export class PostPage extends React.Component {
 	}
 }
 
+export class PostPage extends React.Component {
+	render() {
+		var content = SetContentCSS()
+		var root = document.getElementById("root")
+		root.setAttribute("class", content)
+		content += " NFans vertical"
+		return (
+			<div className={content}>
+				<Header />
+				<Banner />
+				<div className="Content ContentMargin grayAround">
+					<Post />
+				</div>
+				<Footer />
+			</div>
+		)
+	}
+}

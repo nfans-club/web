@@ -2,42 +2,25 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route, withRouter, Link } from 'react-router-dom';
-import './index.css';
-import { Login } from './login'
 import { logicalExpression } from '@babel/types';
-import { SignUp } from './signup';
-import { CreatePost } from './createPost';
-import { PostPage } from './post';
-import cookie from 'react-cookies'
-import { UserPage } from './user';
 import axios from 'axios';
+import { UserPage } from './user';
+import { PostPage } from './post';
+import { CreatePost } from './createPost';
+import { SignUp } from './signup';
+import { Login } from './login'
+import { NotFoundPage } from './notfound';
+import './index.css';
+import { Header, Banner, Footer } from './header'
 
 
-function dateFormat(fmt, date) {
-	let ret;
-	const opt = {
-		"Y+": date.getFullYear().toString(),        // 年
-		"m+": (date.getMonth() + 1).toString(),     // 月
-		"d+": date.getDate().toString(),            // 日
-		"H+": date.getHours().toString(),           // 时
-		"M+": date.getMinutes().toString(),         // 分
-		"S+": date.getSeconds().toString()          // 秒
-	};
-	for (let k in opt) {
-		ret = new RegExp("(" + k + ")").exec(fmt);
-		if (ret) {
-			fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
-		};
-	};
-	return fmt;
-}
+
 
 function fIsMobile() {
 	return /Android|iPhone|iPad|iPod|BlackBerry|webOS|Windows Phone|SymbianOS|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
-export
-	function SetContentCSS() {
+export function SetContentCSS() {
 	if (fIsMobile()) {
 		return "MobContent"
 	} else {
@@ -133,7 +116,7 @@ class PostList extends React.Component {
 		var data = {}
 		data.category = 1
 
-		axios.post('http://192.168.0.65:8080/api/getposts',
+		axios.post('/api/getposts',
 			data
 		).then(res => {
 			if (res.status == 200) {
@@ -166,79 +149,8 @@ class PostList extends React.Component {
 	}
 }
 
-class Banner extends React.Component {
 
-	render() {
-		return (
-			<div className="vertical Content grayAround">
-				<img className="Banner" src="/banner.jpg" />
-				<h1>NFans.Club</h1>
-			</div>
-		)
-	}
-
-}
-
-class Footer extends React.Component {
-	render() {
-		var now = dateFormat("YYYY", new Date())
-		return (
-			<div className="Horizontal">
-				<span>NFans.Club-{now}</span>
-			</div>
-		)
-	}
-}
-
-class ToolsHeader extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			isLogin: false,
-			usrUrl: "/login",
-			usrName: "登录",
-		}
-	}
-
-	componentDidMount() {
-		if (!this.state.isLogin) {
-			var token = cookie.load("usr_token")
-			var info = cookie.load("usr_info")
-			if (token != undefined && info != undefined) {
-				console.log("LOGIN")
-				this.setState({
-					isLogin: true,
-					usrUrl: "/u/" + info.username,
-					usrName: info.username,
-				})
-			}
-		}
-
-	}
-	render() {
-		return (
-			<div className="Horizontal End">
-				<a href="/notification">通知</a>
-				<a href="/submit">创建</a>
-				<a href={this.state.usrUrl}>{this.state.usrName}</a>
-			</div>
-		)
-	}
-}
-
-
-class Header extends React.Component {
-	render() {
-		return (
-			<div className="Header Horizontal">
-				<a href="/">NFans.Club</a>
-				<ToolsHeader />
-			</div>
-		)
-	}
-}
-
-class Home extends React.Component {
+class HomePage extends React.Component {
 	render() {
 		var content = SetContentCSS()
 		var root = document.getElementById("root")
@@ -248,20 +160,32 @@ class Home extends React.Component {
 			<div className={content}>
 				<Header />
 				<Banner />
-				<BrowserRouter>
-					<Switch>
-						<Route exact path="/" component={PostList}></Route>
-						<Route path="/login" component={Login}></Route>
-						<Route path="/signup" component={SignUp}></Route>
-						<Route path="/submit" component={CreatePost}></Route>
-						<Route path="/post/:postid" component={PostPage}></Route>
-						<Route path="/u/:id" component={UserPage}></Route>
-						<Route path="*" component={NotFound}></Route>
-					</Switch>
-				</BrowserRouter>
-
+				<PostList />
 				<Footer />
 			</div>
+		)
+	}
+
+}
+
+class Home extends React.Component {
+	render() {
+		var content = SetContentCSS()
+		var root = document.getElementById("root")
+		root.setAttribute("class", content)
+		content += " NFans vertical"
+		return (
+			<BrowserRouter>
+				<Switch>
+					<Route exact path="/" component={HomePage}></Route>
+					<Route path="/login" component={Login}></Route>
+					<Route path="/signup" component={SignUp}></Route>
+					<Route path="/submit" component={CreatePost}></Route>
+					<Route path="/post/:postid" component={PostPage}></Route>
+					<Route path="/u/:id" component={UserPage}></Route>
+					<Route path="*" component={NotFoundPage}></Route>
+				</Switch>
+			</BrowserRouter>
 		)
 	}
 }
@@ -282,11 +206,7 @@ class NFans extends React.Component {
 }
 
 
-const NotFound = () => (
-	<div>
-		<h1>Not Found</h1>
-	</div>
-)
+
 
 ReactDOM.render(
 	(

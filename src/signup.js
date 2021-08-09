@@ -3,6 +3,8 @@ import React from 'react';
 import './index.css';
 import { SHA256, MD5 } from 'crypto-js';
 import { data } from 'vfile';
+import { Header, Banner, Footer } from './header'
+import { SetContentCSS } from '.';
 
 class SignForm extends React.Component {
 
@@ -65,7 +67,7 @@ class SignForm extends React.Component {
 			this.setState({ Note: "两次密码不相同" })
 			return
 		}
-		axios.post('http://192.168.0.65:8080/api/signup',
+		axios.post('/api/signup',
 			data
 		).then(res => {
 			if (res.status == 200) {
@@ -121,9 +123,18 @@ class SignForm extends React.Component {
 
 export class SignUp extends React.Component {
 	render() {
+		var content = SetContentCSS()
+		var root = document.getElementById("root")
+		root.setAttribute("class", content)
+		content += " NFans vertical"
 		return (
-			<div className="Content ContentMargin grayAround">
-				<SignForm />
+			<div className={content}>
+				<Header />
+				<Banner />
+				<div className="Content ContentMargin grayAround">
+					<SignForm />
+				</div>
+				<Footer />
 			</div>
 		)
 	}

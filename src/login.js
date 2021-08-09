@@ -4,6 +4,8 @@ import { SHA256, MD5 } from 'crypto-js';
 import { Redirect } from 'react-router';
 import axios from 'axios';
 import cookie from 'react-cookies'
+import { Header, Banner, Footer } from './header'
+import { SetContentCSS } from '.';
 
 
 class LoginForm extends React.Component {
@@ -45,7 +47,7 @@ class LoginForm extends React.Component {
 
 		data.pwd = this.getpwd(data.pwd)
 
-		axios.post('http://192.168.0.65:8080/api/login',
+		axios.post('/api/login',
 			data
 		).then(res => {
 			if (res.status == 200) {
@@ -99,9 +101,18 @@ class LoginForm extends React.Component {
 
 export class Login extends React.Component {
 	render() {
+		var content = SetContentCSS()
+		var root = document.getElementById("root")
+		root.setAttribute("class", content)
+		content += " NFans vertical"
 		return (
-			<div className="Content ContentMargin grayAround">
-				<LoginForm />
+			<div className={content}>
+				<Header />
+				<Banner />
+				<div className="Content ContentMargin grayAround">
+					<LoginForm />
+				</div>
+				<Footer />
 			</div>
 		)
 	}
