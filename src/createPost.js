@@ -8,6 +8,7 @@ import { throwStatement, tSThisType } from '@babel/types';
 import axios from 'axios';
 import cookie from 'react-cookies'
 import { useHistory } from 'react-router';
+import { NFANSHOST } from './cfg';
 
 
 
@@ -43,7 +44,7 @@ class Title extends React.Component {
 	}
 
 	getCategory() {
-		axios.get("/api/getcategory")
+		axios.get(NFANSHOST + "/api/getcategory")
 			.then(res => {
 				this.setState({ category: res.data.data })
 			}).catch(res => {
@@ -187,7 +188,7 @@ class TextContext extends React.Component {
 			content: this.state.content,
 			category: this.state.category.id
 		}
-		axios.post("/api/createpost", data)
+		axios.post(NFANSHOST + "/api/createpost", data)
 			.then(res => {
 				console.log(this)
 				console.log("发送成功");

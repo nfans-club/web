@@ -12,11 +12,12 @@ import { Login } from './login'
 import { NotFoundPage } from './notfound';
 import './index.css';
 import { Header, Banner, Footer } from './header'
+import { NFANSHOST } from './cfg';
 
 
 
 
-function fIsMobile() {
+export function fIsMobile() {
 	return /Android|iPhone|iPad|iPod|BlackBerry|webOS|Windows Phone|SymbianOS|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
@@ -114,9 +115,9 @@ class PostList extends React.Component {
 	getPosts() {
 
 		var data = {}
-		data.category = 1
+		data.category = 0
 
-		axios.post('/api/getposts',
+		axios.post(NFANSHOST + '/api/getposts',
 			data
 		).then(res => {
 			if (res.status == 200) {

@@ -6,6 +6,7 @@ import axios from 'axios';
 import cookie from 'react-cookies'
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+import { NFANSHOST } from './cfg';
 
 var content = SetContentCSS()
 var HContent = content + " Horizontal"
@@ -26,15 +27,28 @@ class Content extends React.Component {
 class Footer extends React.Component {
 	//<i className="icofont-worried icon"></i>
 	//<span className="iconnote">123</span>
+	//<div className="Start Horizontal">
+	//	<i className="icofont-simple-smile icon"></i>
+	//	<span className="iconnote">{this.props.data.like}</span>
+	//</div>
 	render() {
 		return (
 			<div className="Horizontal ContentMargin Start ">
-				<div className="Start Horizontal">
+				<button className="ButtonNone">
 					<i className="icofont-simple-smile icon"></i>
+					<span className="hdot"></span>
 					<span className="iconnote">{this.props.data.like}</span>
-				</div>
-				<button className="CommentButton">打赏</button>
-				<button className="CommentButton">举报</button>
+				</button>
+				<button className="ButtonNone">
+					<i className="icofont-gift icon"></i>
+					<span className="hdot"></span>
+					<span className="iconnote">打赏 </span>
+				</button>
+				<button className="ButtonNone">
+					<i className="icofont-flag icon"></i>
+					<span className="hdot"></span>
+					<span className="iconnote">举报 </span>
+				</button>
 			</div>
 		)
 	}
@@ -70,7 +84,7 @@ export class CommentArea extends React.Component {
 		data.post_id = parseInt(this.props.data.id)
 		data.comment = this.state.comment
 		data.token = cookie.load("usr_token")
-		axios.post("/api/createcomment",
+		axios.post(NFANSHOST + "/api/createcomment",
 			data
 		).then(res => {
 			if (res.status == 200) {
@@ -112,7 +126,7 @@ class Header extends React.Component {
 	render() {
 		return (
 			<div className="Horizontal Start ContentMargin">
-				<img className="BIMG Small " src="logo192.png"></img>
+				<img className="BIMG Small " src="/logo192.png"></img>
 				<Link className="apoint" to={"/u/" + this.props.data.username}>
 					{this.props.data.username}
 				</Link>

@@ -6,6 +6,8 @@ import axios from 'axios';
 import cookie from 'react-cookies'
 import { Header, Banner, Footer } from './header'
 import { SetContentCSS } from '.';
+import { Link } from 'react-router-dom';
+import { NFANSHOST } from './cfg';
 
 
 class LoginForm extends React.Component {
@@ -47,7 +49,7 @@ class LoginForm extends React.Component {
 
 		data.pwd = this.getpwd(data.pwd)
 
-		axios.post('/api/login',
+		axios.post(NFANSHOST + '/api/login',
 			data
 		).then(res => {
 			if (res.status == 200) {
@@ -91,7 +93,7 @@ class LoginForm extends React.Component {
 				</form>
 
 				<p>
-					没有账号？<a href="/signup">去注册</a>
+					没有账号？<Link className="apoint" to="/signup">去注册</Link>
 				</p>
 
 			</div>

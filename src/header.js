@@ -75,7 +75,7 @@ export class Banner extends React.Component {
 
 	render() {
 		return (
-			<div className="vertical Content grayAround">
+			<div className="vertical Content grayAround BannerCtx" >
 				<img className="Banner" src="/banner.jpg" />
 				<h1>NFans.Club</h1>
 			</div>

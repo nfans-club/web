@@ -5,6 +5,7 @@ import { SHA256, MD5 } from 'crypto-js';
 import { data } from 'vfile';
 import { Header, Banner, Footer } from './header'
 import { SetContentCSS } from '.';
+import { NFANSHOST } from './cfg';
 
 class SignForm extends React.Component {
 
@@ -67,7 +68,7 @@ class SignForm extends React.Component {
 			this.setState({ Note: "两次密码不相同" })
 			return
 		}
-		axios.post('/api/signup',
+		axios.post(NFANSHOST + '/api/signup',
 			data
 		).then(res => {
 			if (res.status == 200) {

@@ -7,6 +7,7 @@ import axios from 'axios';
 import cookie from 'react-cookies'
 import { SetContentCSS } from '.';
 import { Header, Banner, Footer } from './header'
+import { NFANSHOST } from './cfg';
 
 class PHeader extends React.Component {
 	render() {
@@ -66,15 +67,20 @@ class PFooter extends React.Component {
 				<div className="Horizontal ContentMargin Start ">
 					<div className="Horizontal">
 						<i className="icofont-comment icon"></i>
+						<span className="hdot"></span>
 						<span className="iconnote">{this.props.data.comments}</span>
 					</div>
 					<div className="Horizontal">
 						<i className="icofont-eye-alt icon"></i>
+						<span className="hdot"></span>
 						<span className="iconnote">{this.props.data.views}</span>
 					</div>
 					<div className="Horizontal">
-						<i className="icofont-gift icon"></i>
-						<span className="iconnote"> 打赏 </span>
+						<button className="ButtonNone">
+							<i className="icofont-gift icon"></i>
+							<span className="hdot"></span>
+							<span className="iconnote">打赏 </span>
+						</button>
 					</div>
 				</div>
 			</footer>
@@ -115,8 +121,7 @@ class Post extends React.Component {
 		this.state = {
 			comments: []
 		};
-		console.log(props)
-		this.id = this.props.match.params.postid
+		this.id = this.props.id
 		this.getPosts()
 		this.getComments()
 	}
@@ -124,7 +129,7 @@ class Post extends React.Component {
 	getPosts() {
 		var data = {}
 		data.post_id = parseInt(this.id)
-		axios.post("/api/getpost", data)
+		axios.post(NFANSHOST + "/api/getpost", data)
 			.then(res => {
 				if (res.status == 200) {
 					console.log(res)
@@ -139,7 +144,7 @@ class Post extends React.Component {
 		var data = {}
 		data.token = cookie.load("usr_token")
 		data.post_id = parseInt(this.id)
-		axios.post("/api/getcomments", data)
+		axios.post(NFANSHOST + "/api/getcomments", data)
 			.then(res => {
 				this.setState({ comments: res.data.data })
 			}).catch(res => {
@@ -188,12 +193,13 @@ export class PostPage extends React.Component {
 		var root = document.getElementById("root")
 		root.setAttribute("class", content)
 		content += " NFans vertical"
+		var id = this.props.match.params.postid
 		return (
 			<div className={content}>
 				<Header />
 				<Banner />
-				<div className="Content ContentMargin grayAround">
-					<Post />
+				<div className="Content ContentMargin ">
+					<Post id={id} />
 				</div>
 				<Footer />
 			</div>
