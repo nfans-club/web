@@ -53,7 +53,7 @@ class Content extends React.Component {
 		return (
 			<div className="Post ContentMargin vertical">
 				<ReactMarkdown>
-					{this.props.data.Content}
+					{this.props.data.content}
 				</ReactMarkdown>
 			</div>
 		)
