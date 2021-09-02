@@ -172,6 +172,23 @@ h1{
   word-break: break-word;
 }
 
+
+.PostTitle > h1{
+  padding-bottom: .3em;
+  font-size: 1.4em;
+  padding: 0px;
+  margin: 0px ;
+}
+.markdown > h1 {
+  font-size: 1.3em;
+}
+.markdown > h2 {
+  font-size: 1.2em;
+}
+.markdown > h3 {
+  font-size: 1.1em;
+}
+
 .PostContent{
   display: block;
 }
@@ -372,4 +389,14 @@ code{
 a{
   color: rgb(0, 106, 177);
   text-decoration: none;
+}
+
+.error{
+  color: red;
+}
+
+.markdown > blockquote{
+  margin: 4px 0px 4px 8px;
+  border-left: 4px solid silver;
+  padding-left: 8px;
 }

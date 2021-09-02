@@ -15,7 +15,7 @@ var VContent = content + " vertical"
 class Content extends React.Component {
 	render() {
 		return (
-			<div className=" ContentMargin vertical">
+			<div className=" ContentMargin vertical markdown">
 				<ReactMarkdown>
 					{this.props.data.comment}
 				</ReactMarkdown>
@@ -84,6 +84,10 @@ export class CommentArea extends React.Component {
 		data.post_id = parseInt(this.props.data.id)
 		data.comment = this.state.comment
 		data.token = cookie.load("usr_token")
+		if (data.token == undefined) {
+			this.setState({ note: "请先登录" })
+			return
+		}
 		axios.post(NFANSHOST + "/api/createcomment",
 			data
 		).then(res => {
@@ -92,9 +96,13 @@ export class CommentArea extends React.Component {
 				window.location.reload()
 			} else {
 				console.log("error on comment")
+				this.setState({ note: res.response.data.msg })
 			}
 		}).catch(res => {
 			console.log(res);
+			if (res.response != undefined && res.response.data != undefined) {
+				this.setState({ note: res.response.data.msg })
+			}
 		})
 	}
 
@@ -106,6 +114,7 @@ export class CommentArea extends React.Component {
 		return (
 			<div className={VContent + " ContentMargin"}>
 				<div className={VContent}>
+					<span className="error">{this.state.note}</span>
 					<span className={HContent}>评论·Markdown</span>
 					<span className="vdot"></span>
 					<textarea className={content} onChange={this.handleCommentInput}></textarea>

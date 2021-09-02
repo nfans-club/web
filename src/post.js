@@ -41,8 +41,8 @@ class PHeader extends React.Component {
 class Title extends React.Component {
 	render() {
 		return (
-			<div className="vertical Start ContentMargin">
-				<span className="Start PostTitle">{this.props.data.title}</span>
+			<div className="vertical Start ContentMargin PostTitle ">
+				<h1 className="Start PostTitle">{this.props.data.title}</h1>
 			</div>
 		)
 	}
@@ -51,7 +51,7 @@ class Title extends React.Component {
 class Content extends React.Component {
 	render() {
 		return (
-			<div className="Start ContentMargin vertical">
+			<div className="Start ContentMargin vertical markdown">
 				<ReactMarkdown>
 					{this.props.data.content}
 				</ReactMarkdown>
