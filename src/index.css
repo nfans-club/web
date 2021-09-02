@@ -43,6 +43,12 @@ ul{
   list-style:none;
 }
 
+.markdown > ul {
+  list-style:inside;
+  margin: 4px 0px 4px 8px;
+  padding: auto;
+}
+
 .hdot{
   margin: 0px 2px;
 }
