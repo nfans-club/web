@@ -51,7 +51,7 @@ class Title extends React.Component {
 class Content extends React.Component {
 	render() {
 		return (
-			<div className="Post ContentMargin vertical">
+			<div className="Start ContentMargin vertical">
 				<ReactMarkdown>
 					{this.props.data.content}
 				</ReactMarkdown>

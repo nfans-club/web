@@ -58,7 +58,7 @@ class PostContent extends React.Component {
 		//var test = "Hello, *world* 以小写字母开头的元素代表一个 HTML 内置组件，比如 <div> 或者 <span> 会生成相应的字符串 'div' 或者 'span' 传递给 React.createElement（作为参数）。大写字母开头的元素则对应着在 JavaScript 引入或自定义的组件，如 <Foo /> 会编译为 React.createElement(Foo)。 sdjf; ajfd;adjf; akljdfa; lsdjfka; skdjfa; sdjkfa; skdjfas; ljdfkas;kdfjas;fjas; lkdjfsa;ldkfja;slkdfjas;lkfja;slkdjfa;slkjfdljflajfka;lskjdfa;lskdjf;lkjl!\r\n\r\n![Image of Yaktocat](/logo192.png)\r\n\r\n![Image of test](/test.png)\r\n\r\n this is my first post check out"
 		return (
 			<div onClick={this.clicked} className="Start TextTitle ContentMargin vertical">
-				<Link className="apoint" to={"/post/" + this.props.data.id}>
+				<Link className="apoint customa" to={"/post/" + this.props.data.id}>
 					{this.props.data.title}
 				</Link>
 			</div>

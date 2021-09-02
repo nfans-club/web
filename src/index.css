@@ -30,7 +30,7 @@ body{
   width: 95%;
 }
 
-a{
+.customa{
   text-decoration:none;
   color: inherit;
 }
@@ -363,4 +363,13 @@ textarea{
   padding: 0px;
   margin: 0px;
 
+}
+
+code{
+  color: rgb(183, 69, 65);
+}
+
+a{
+  color: rgb(0, 106, 177);
+  text-decoration: none;
 }
