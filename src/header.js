@@ -1,5 +1,9 @@
 import React from 'react';
 import cookie from 'react-cookies'
+import {Carousel} from 'antd'
+import {
+	HomeOutlined
+  } from '@ant-design/icons';
 import { BrowserRouter, Switch, Route, withRouter, Link } from 'react-router-dom';
 
 function dateFormat(fmt, date) {
@@ -63,7 +67,9 @@ export class Header extends React.Component {
 	render() {
 		return (
 			<div className="Header Horizontal">
-				<Link to="/">NFans.Club</Link>
+				<div className="header-breadcrumb">
+					<Link to="/"><HomeOutlined />NFans.Club</Link>
+				</div>
 				<ToolsHeader />
 			</div>
 		)
@@ -75,10 +81,23 @@ export class Banner extends React.Component {
 
 	render() {
 		return (
+			// <div className="vertical Content grayAround BannerCtx" >
+			// 	<img className="Banner" src="/banner.jpg" />
+			// 	<h1>NFans.Club</h1>
+			// </div>
 			<div className="vertical Content grayAround BannerCtx" >
-				<img className="Banner" src="/banner.jpg" />
-				<h1>NFans.Club</h1>
-			</div>
+				<Carousel  autoplay dotPosition='bottom' >
+					<div>
+						<img className="Banner" src="/img/banner.png" />
+					</div>
+					<div>
+						<img className="Banner" src="/img/banner2.png" />
+					</div>
+					<div >
+						<img className="Banner" src="/img/banner3.png" />
+					</div>
+				</Carousel>
+		  	</div>
 		)
 	}
 

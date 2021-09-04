@@ -1,3 +1,4 @@
+@import '~antd/dist/antd.css';
 *{
   box-sizing: border-box;
 }
@@ -56,7 +57,11 @@ ul{
   margin: 2px 0px;
 }
 
-div,form,ul{
+div{
+  /* display: flex; */
+  margin: 0;
+}
+form{
   display: flex;
   margin: 0;
 }
@@ -73,11 +78,19 @@ div,form,ul{
 }
 
 .Header{
+  height: 60px;
+  line-height: 60px;
   justify-content: space-between;
   width: 100%;
+  display: flex;
 }
 
+.header-breadcrumb{
 
+}
+.anticon-home{
+  margin-right: 5px;
+}
 .End{
   justify-content: flex-end;
 }
@@ -107,6 +120,7 @@ div,form,ul{
 
 .Banner{
   width: 100%;
+  display: inline !important;
 }
 
 .Post{
@@ -129,16 +143,25 @@ div,form,ul{
   white-space: nowrap;
 }
 
+
+/* 解决走马灯样式冲突，后续若需要相关样式建议单独应用，请勿泛滥使用全局样式 */
 ul{
   justify-content: center;
-  flex-direction: column;
-  width: 100%;
+  /* flex-direction: column; */
+  /* width: 100%; */
   padding-inline-start: 0px;
   margin-block: 0;
-  margin-inline: 0; flex-direction: column;
+  margin-inline: 0; 
+  /* flex-direction: column; */
 }
+
+/* 就近添加走马灯轮播图样式 */
+.ant-carousel .slick-dots{
+  margin: 0 30% !important;
+}
+
 li{
-  width: 100%;
+  width: 100% !important;
 }
 
 .BIMG{
@@ -406,3 +429,4 @@ a{
   border-left: 4px solid silver;
   padding-left: 8px;
 }
+
